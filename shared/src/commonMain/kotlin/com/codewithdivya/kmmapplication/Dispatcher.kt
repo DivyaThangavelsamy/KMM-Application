@@ -2,7 +2,7 @@ package com.codewithdivya.kmmapplication
 
 import kotlinx.coroutines.CoroutineDispatcher
 
-internal expect val ApplicationDispatcher:
+internal expect val ApplicationDispatcher: CoroutineDispatcher
 
 
 
