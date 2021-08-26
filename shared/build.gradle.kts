@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization") version "1.5.0"
+    kotlin("plugin.serialization") version "1.5.20"
     id("com.android.library")
 }
 
@@ -24,6 +24,7 @@ kotlin {
     sourceSets {
         val ktor_version = "1.6.2"
         val napierVersion = "2.0.0"
+        val coroutineVersion = "1.4.2"
 
         val commonMain by getting {
             dependencies {
@@ -35,6 +36,17 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktor_version")
                 implementation("io.ktor:ktor-client-logging:$ktor_version")
                 implementation("io.ktor:ktor-client-serialization:$ktor_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+
+                //Coroutines
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
+
+                implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+                implementation(
+                    "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
+                implementation(
+                    "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+                implementation("io.ktor:ktor-client-core:$ktor_version")
             }
         }
         val commonTest by getting {
@@ -45,7 +57,14 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-okhttp:$ktor_version")
+                implementation("io.ktor:ktor-client-android:$ktor_version")
+                //Coroutines
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+
+                implementation("androidx.core:core-ktx:1.6.0")
+                implementation(
+                    "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+                implementation("io.ktor:ktor-client-android:$ktor_version")
             }
         }
         val androidTest by getting {

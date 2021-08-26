@@ -1,43 +1,23 @@
 package com.codewithdivya.kmmapplication.android
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import com.codewithdivya.kmmapplication.Greeting
 import kotlinx.coroutines.*
 
-
 class MainActivity : AppCompatActivity() {
-    private val mainScope = MainScope()
-    private val greeting = Greeting()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = "Loading..."
-
-        Toast.makeText(this, "hello", Toast.LENGTH_LONG).show()
-        mainScope.launch {
-            kotlin.runCatching {
-                greeting.greeting()
-            }.onSuccess {
-                tv.text = it
-            }.onFailure {
-                tv.text = it.localizedMessage
-            }
-
-            Toast.makeText(this@MainActivity, "hello2", Toast.LENGTH_LONG).show()
-        }
-
-
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mainScope.cancel()
+    fun openGrains(v: View?) {
+        val intent = Intent(this, MultiGrainActivity::class.java)
+        startActivity(intent)
     }
-
 }
